@@ -14,6 +14,7 @@ import java.time.Instant;
 @Data
 @Builder
 public class MvtStkDto {
+    private Integer id;
     private Instant deteMvt;
 
     private BigDecimal quantite;

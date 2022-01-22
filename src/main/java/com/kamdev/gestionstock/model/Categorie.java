@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -23,4 +24,5 @@ public class Categorie  extends  AbstractEntity{
     private  String designation;
     @OneToMany(mappedBy = "category")
     private List<Article> articleList;
+
 }
