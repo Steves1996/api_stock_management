@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -18,7 +19,7 @@ public class CommandeClientDto {
     private List<LigneCommandeClientDto> ligneCommandeClients;
 
     public static CommandeClientDto fromEntity(CommandeClient commandeClient) {
-        if(client == null){
+        if(commandeClient == null){
             return null;
             //TODO throw an exception
         }
@@ -26,10 +27,14 @@ public class CommandeClientDto {
                 .id(commandeClient.getId())
                 .code(commandeClient.getCode())
                 .dateCommande(commandeClient.getDateCommande())
+                .ligneCommandeClients(commandeClient.getLigneCommandeClients() != null ?
+                        commandeClient.getLigneCommandeClients().stream()
+                                .map(LigneCommandeClientDto::fromEntity)
+                                .collect(Collectors.toList()):null)
                 .build();
     }
 
-    public CommandeClient toEntity(CommandeClientDto commandeClientDto) {
+    public static CommandeClient toEntity(CommandeClientDto commandeClientDto) {
         if(commandeClientDto == null){
             return null;
             //TODO throw an exception

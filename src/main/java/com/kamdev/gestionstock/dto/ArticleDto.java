@@ -4,11 +4,13 @@ import com.kamdev.gestionstock.model.Article;
 import com.kamdev.gestionstock.model.Categorie;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 import java.math.BigDecimal;
 
-@Builder
+
 @Data
+@Builder
 public class ArticleDto {
     private Integer id;
     private String codeArticle;
@@ -20,7 +22,7 @@ public class ArticleDto {
     private CategorieDto category;
 
 
-    public ArticleDto fromEntity(Article article) {
+    public static ArticleDto fromEntity(Article article) {
         if(article == null){
             return null;
             //TODO throw an exception
@@ -30,15 +32,15 @@ public class ArticleDto {
                 .codeArticle(article.getCodeArticle())
                 .designation(article.getDesignation())
                 .photo(article.getPhoto())
-                .prixUnitaireHt(getPrixUnitaireHt())
-                .prixUnitaireTtc(getPrixUnitaireTtc())
-                .category(getCategory())
-                .tauxTva(getTauxTva())
+                .prixUnitaireHt(article.getPrixUnitaireHt())
+                .prixUnitaireTtc(article.getPrixUnitaireTtc())
+                .category(CategorieDto.fromEntity(article.getCategory()))
+                .tauxTva(article.getTauxTva())
                 .category(CategorieDto.fromEntity(article.getCategory()))
                 .build();
     }
 
-    public  Article toEntity(ArticleDto articleDto) {
+    public static Article toEntity(ArticleDto articleDto) {
         if(articleDto == null){
             return null;
             //TODO throw an exception
