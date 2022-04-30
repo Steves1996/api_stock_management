@@ -23,7 +23,7 @@ public class UtilisateurValidator {
         if (!StringUtils.hasLength(utilisateurDto.getMotDePasse())) {
             errors.add("Veuillez renseigner le mot de passe d'utilisateur");
         }
-        if (!StringUtils.hasLength(utilisateurDto.getDateDeNaissance())) {
+        if (utilisateurDto.getDateDeNaissance() == null) {
             errors.add("Veuillez renseigner la date de naissance de d'utilisateur");
         }
         if (utilisateurDto.getAdresse() == null) {

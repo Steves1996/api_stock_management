@@ -12,6 +12,10 @@ public class ClientValidator {
     public static List<String> validate(ClientDto clientDto) {
         List<String> errors = new ArrayList<>();
 
+        if(clientDto == null){
+            errors.add("Entrez les informations du client");
+            return  errors;
+        }
         if (!StringUtils.hasLength(clientDto.getNom())) {
             errors.add("Veuillez renseigner le nom client");
         }
