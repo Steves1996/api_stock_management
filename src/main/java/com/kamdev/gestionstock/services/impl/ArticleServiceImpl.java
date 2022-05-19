@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -38,7 +39,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDto fidById(Integer id) {
+    public ArticleDto findById(Integer id) {
         if (id == null) {
             log.error("Article Id est null");
             return null;
@@ -65,11 +66,17 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleDto> findAll() {
-        return null;
+        return articleRepository.findAll().stream()
+                .map(ArticleDto::fromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void delete(Integer id) {
-
+        if (id == null) {
+            log.error("Article Id est null");
+            return;
+        }
+        articleRepository.deleteById(id);
     }
 }
