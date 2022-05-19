@@ -25,7 +25,7 @@ public class CategorieController implements CategorieApi {
     }
 
     @Override
-    public CategorieDto fidById(Integer id) {
+    public CategorieDto findById(Integer id) {
         return categorieService.findById(id);
     }
 

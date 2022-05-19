@@ -1,6 +1,7 @@
 package com.kamdev.gestionstock.dto;
 
 import com.kamdev.gestionstock.model.Adresse;
+import com.kamdev.gestionstock.model.Client;
 import com.kamdev.gestionstock.model.Entreprise;
 import lombok.Builder;
 import lombok.Data;
@@ -43,5 +44,19 @@ public class EntrepriseDto {
                                 .map(UtilisateurDto::fromEntity)
                                 .collect(Collectors.toList()) : null)
                 .build();
+    }
+
+    public static Entreprise toEntity(EntrepriseDto entrepriseDto) {
+        if(entrepriseDto == null){
+            return null;
+            //TODO throw an exception
+        }
+        Entreprise entreprise = new Entreprise();
+        entreprise.setId(entrepriseDto.getId());
+        entreprise.setNom(entrepriseDto.getNom());
+        entreprise.setEmail(entrepriseDto.getEmail());
+        entreprise.setDescription(entrepriseDto.getDescription());
+        entreprise.setNumTel(entrepriseDto.getNumTel());
+        return entreprise;
     }
 }

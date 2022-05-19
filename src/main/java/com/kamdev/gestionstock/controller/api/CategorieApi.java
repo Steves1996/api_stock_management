@@ -15,7 +15,7 @@ public interface CategorieApi {
     CategorieDto save(@RequestBody CategorieDto dto);
 
     @GetMapping(value = APP_ROOT+"/categories/{idCategory}",produces = MediaType.APPLICATION_JSON_VALUE)
-    CategorieDto fidById(@PathVariable("idCategory") Integer id);
+    CategorieDto findById(@PathVariable("idCategory") Integer id);
 
     @GetMapping(value = APP_ROOT+"/categories/{codeCategory}",produces = MediaType.APPLICATION_JSON_VALUE)
     CategorieDto findByCodeCategory(@PathVariable("codeCategory") String codeCategory);

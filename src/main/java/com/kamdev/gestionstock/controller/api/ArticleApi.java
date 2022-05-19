@@ -14,7 +14,7 @@ public interface ArticleApi {
     ArticleDto save(@RequestBody  ArticleDto dto);
 
     @GetMapping(value = APP_ROOT+"/articles/{idArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
-    ArticleDto fidById(@PathVariable("idArticle") Integer id);
+    ArticleDto findById(@PathVariable("idArticle") Integer id);
 
     @GetMapping(value = APP_ROOT+"/articles/{codeArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
     ArticleDto findByCodeArticle(@PathVariable("codeArticle") String codeArticle);

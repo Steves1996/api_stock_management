@@ -23,7 +23,7 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
-    public ArticleDto fidById(Integer id) {
+    public ArticleDto findById(Integer id) {
         return articleService.findById(id);
     }
 
