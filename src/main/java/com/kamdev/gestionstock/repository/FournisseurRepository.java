@@ -4,5 +4,9 @@ import com.kamdev.gestionstock.model.Fournisseur;
 import com.kamdev.gestionstock.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FournisseurRepository extends JpaRepository<Integer, Fournisseur> {
+import java.util.Optional;
+
+public interface FournisseurRepository extends JpaRepository<Fournisseur, Integer> {
+
+    Optional<Fournisseur> findFournisseurByNom(String nom);
 }

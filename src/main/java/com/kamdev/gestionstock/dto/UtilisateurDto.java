@@ -45,4 +45,16 @@ public class UtilisateurDto {
                                 .collect(Collectors.toList()) : null)
                 .build();
     }
+
+    public static Utilisateur toEntity(UtilisateurDto utilisateurDto) {
+        if(utilisateurDto == null){
+            return null;
+            //TODO throw an exception
+        }
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setId(utilisateurDto.getId());
+        utilisateur.setNom(utilisateurDto.getNom());
+        utilisateur.setPrenom(utilisateurDto.getPrenom());
+        return utilisateur;
+    }
 }
