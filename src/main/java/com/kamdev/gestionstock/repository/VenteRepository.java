@@ -4,5 +4,8 @@ import com.kamdev.gestionstock.model.Utilisateur;
 import com.kamdev.gestionstock.model.Ventes;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VenteRepository extends JpaRepository<Integer, Ventes> {
+import java.util.Optional;
+
+public interface VenteRepository extends JpaRepository<Ventes,Integer> {
+    Optional<Ventes> findVentesByCode(String code);
 }
