@@ -1,5 +1,6 @@
 package com.kamdev.gestionstock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kamdev.gestionstock.model.Client;
 import com.kamdev.gestionstock.model.CommandeClient;
 import lombok.Builder;
@@ -19,7 +20,7 @@ public class CommandeClientDto {
     private List<LigneCommandeClientDto> ligneCommandeClients;
 
     public static CommandeClientDto fromEntity(CommandeClient commandeClient) {
-        if(commandeClient == null){
+        if (commandeClient == null) {
             return null;
             //TODO throw an exception
         }
@@ -27,15 +28,12 @@ public class CommandeClientDto {
                 .id(commandeClient.getId())
                 .code(commandeClient.getCode())
                 .dateCommande(commandeClient.getDateCommande())
-                .ligneCommandeClients(commandeClient.getLigneCommandeClients() != null ?
-                        commandeClient.getLigneCommandeClients().stream()
-                                .map(LigneCommandeClientDto::fromEntity)
-                                .collect(Collectors.toList()):null)
+                .client(ClientDto.fromEntity(commandeClient.getClient()))
                 .build();
     }
 
     public static CommandeClient toEntity(CommandeClientDto commandeClientDto) {
-        if(commandeClientDto == null){
+        if (commandeClientDto == null) {
             return null;
             //TODO throw an exception
         }

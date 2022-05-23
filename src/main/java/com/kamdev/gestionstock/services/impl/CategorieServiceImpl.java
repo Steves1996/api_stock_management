@@ -1,15 +1,12 @@
 package com.kamdev.gestionstock.services.impl;
 
-import com.kamdev.gestionstock.dto.ArticleDto;
 import com.kamdev.gestionstock.dto.CategorieDto;
 import com.kamdev.gestionstock.exception.EntityNotFoundException;
 import com.kamdev.gestionstock.exception.ErrorCodes;
 import com.kamdev.gestionstock.exception.InvalidEntityException;
-import com.kamdev.gestionstock.model.Article;
 import com.kamdev.gestionstock.model.Categorie;
 import com.kamdev.gestionstock.repository.CategorieRepository;
 import com.kamdev.gestionstock.services.CategorieService;
-import com.kamdev.gestionstock.validator.ArticleValidator;
 import com.kamdev.gestionstock.validator.CategorieValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,11 +57,12 @@ public class CategorieServiceImpl implements CategorieService {
             log.error("Code categorie est null");
             return null;
         }
-        Optional<Categorie> categorie = categorieRepository.findByCode(code);
 
-        return Optional.of(CategorieDto.fromEntity(categorie.get())).orElseThrow(() ->
-                new EntityNotFoundException("Cette categorie n'existe pas",
-                        ErrorCodes.CATEGORIE_NOT_FOUND));
+        return categorieRepository.findByCode(code)
+                .map(CategorieDto::fromEntity)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Cette categorie n'existe pas", ErrorCodes.CATEGORIE_NOT_FOUND));
+
     }
 
     @Override

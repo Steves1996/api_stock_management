@@ -4,5 +4,5 @@ import com.kamdev.gestionstock.model.LigneCommandeFournisseur;
 import com.kamdev.gestionstock.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LigneCommandeFounisseurRepository extends JpaRepository<Integer, LigneCommandeFournisseur> {
+public interface LigneCommandeFounisseurRepository extends JpaRepository<LigneCommandeFournisseur, Integer> {
 }

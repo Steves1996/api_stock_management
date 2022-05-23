@@ -4,5 +4,5 @@ import com.kamdev.gestionstock.model.LigneCommandeClient;
 import com.kamdev.gestionstock.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LigneCommandeClientRepository extends JpaRepository<Integer, LigneCommandeClient> {
+public interface LigneCommandeClientRepository extends JpaRepository<LigneCommandeClient,Integer> {
 }

@@ -20,6 +20,9 @@ public class ArticleDto {
     private BigDecimal prixUnitaireTtc;
     private String photo;
     private CategorieDto category;
+    private  int idEntreprise;
+
+    //TODO Add mapping of idEntreprise in all DTO
 
 
     public static ArticleDto fromEntity(Article article) {
@@ -36,6 +39,7 @@ public class ArticleDto {
                 .prixUnitaireTtc(article.getPrixUnitaireTtc())
                 .category(CategorieDto.fromEntity(article.getCategory()))
                 .tauxTva(article.getTauxTva())
+                .idEntreprise(article.getIdEntreprise())
                 .category(CategorieDto.fromEntity(article.getCategory()))
                 .build();
     }
@@ -53,6 +57,7 @@ public class ArticleDto {
         article.setPrixUnitaireHt(articleDto.getPrixUnitaireHt());
         article.setPrixUnitaireTtc(articleDto.getPrixUnitaireTtc());
         article.setTauxTva(articleDto.getTauxTva());
+        article.setIdEntreprise(articleDto.getIdEntreprise());
         article.setCategory(CategorieDto.toEntity(articleDto.getCategory()));
         return article;
     }

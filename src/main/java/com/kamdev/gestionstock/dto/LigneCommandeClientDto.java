@@ -1,5 +1,6 @@
 package com.kamdev.gestionstock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kamdev.gestionstock.model.Categorie;
 import com.kamdev.gestionstock.model.LigneCommandeClient;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 public class LigneCommandeClientDto {
     private Integer id;
     private ArticleDto article;
+    @JsonIgnore
     private CommandeClientDto commandeClient;
     private BigDecimal quantite;
     private BigDecimal prixUnitaire;
