@@ -10,10 +10,13 @@ spring:
     show-sql: false
 
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: "org.hibernate.dialect.MySQL5Dialect"
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 server:
   port: 8081
 
@@ -22,3 +25,4 @@ flickr:
   apiSecret: 33e3e51229728a96
   appKey: 72157720844389491-6482291377e7d0fd
   appSecret: 6391d1511c8fae95
+
