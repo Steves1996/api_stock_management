@@ -52,13 +52,13 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public CategorieDto findByCode(String code) {
+    public CategorieDto findCategorieByCode(String code) {
         if (StringUtils.hasLength(code)) {
             log.error("Code categorie est null");
             return null;
         }
 
-        return categorieRepository.findByCode(code)
+        return categorieRepository.findCategorieByCode(code)
                 .map(CategorieDto::fromEntity)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Cette categorie n'existe pas", ErrorCodes.CATEGORIE_NOT_FOUND));

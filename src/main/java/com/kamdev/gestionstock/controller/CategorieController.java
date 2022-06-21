@@ -31,7 +31,7 @@ public class CategorieController implements CategorieApi {
 
     @Override
     public CategorieDto findByCodeCategory(String codeCategory) {
-        return categorieService.findByCode(codeCategory);
+        return categorieService.findCategorieByCode(codeCategory);
     }
 
     @Override
