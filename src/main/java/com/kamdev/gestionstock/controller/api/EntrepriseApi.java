@@ -3,6 +3,7 @@ package com.kamdev.gestionstock.controller.api;
 import com.kamdev.gestionstock.dto.ArticleDto;
 import com.kamdev.gestionstock.dto.ClientDto;
 import com.kamdev.gestionstock.dto.EntrepriseDto;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import static com.kamdev.gestionstock.utils.Constants.APP_ROOT;
 
+@Api(APP_ROOT + "/entreprise")
 public interface EntrepriseApi {
 
     @PostMapping(value = APP_ROOT + "/entreprise/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
