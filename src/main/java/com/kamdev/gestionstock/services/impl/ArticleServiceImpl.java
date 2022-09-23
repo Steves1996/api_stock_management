@@ -53,7 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleDto findByCodeArticle(String codeArticle) {
-        if (StringUtils.hasLength(codeArticle)) {
+        if (!StringUtils.hasLength(codeArticle)) {
             log.error("Code article est null");
             return null;
         }

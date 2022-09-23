@@ -8,12 +8,14 @@ spring:
   jpa:
     database: MYSQL
     show-sql: false
+    properties:
+      hibernate:
+        ejb:
+          interceptor: com.kamdev.gestionstock.interceptor.Interceptor
 
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: "org.hibernate.dialect.MySQL5Dialect"
+      dialect: "org.hibernate.dialect.MySQL5Dialect"
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

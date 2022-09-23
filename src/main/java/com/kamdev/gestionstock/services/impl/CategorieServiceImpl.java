@@ -52,8 +52,8 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public CategorieDto findCategorieByCode(String code) {
-        if (StringUtils.hasLength(code)) {
+    public CategorieDto findByCode(String code) {
+        if (!StringUtils.hasLength(code)) {
             log.error("Code categorie est null");
             return null;
         }

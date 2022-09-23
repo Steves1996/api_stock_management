@@ -56,7 +56,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public UtilisateurDto findUtilisateurByNom(String name) {
-        if (StringUtils.hasLength(name)) {
+        if (!StringUtils.hasLength(name)) {
             log.error("Nom de l'utilisateur est null");
             return null;
         }

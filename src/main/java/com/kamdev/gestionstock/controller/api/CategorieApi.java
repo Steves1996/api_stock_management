@@ -38,7 +38,7 @@ public interface CategorieApi {
             @ApiResponse(code = 200, message = "La categorie a été trouve dans la BD"),
             @ApiResponse(code = 404, message = "Aucune categori n'a été trouve dans la BD")
     })
-    CategorieDto findByCodeCategory(@PathVariable("codeCategory") String codeCategory);
+    CategorieDto findByCode(@PathVariable("codeCategory") String codeCategory);
 
     @GetMapping(value = APP_ROOT+"/categories/all",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoie la liste des categories", notes = "Cette methode permet de chercher et de renvoyer la liste des categories", responseContainer = "List<CategorieDto>")

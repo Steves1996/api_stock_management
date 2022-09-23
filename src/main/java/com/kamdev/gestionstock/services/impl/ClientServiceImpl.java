@@ -56,7 +56,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto findClientByNom(String name) {
-        if (StringUtils.hasLength(name)) {
+        if (!StringUtils.hasLength(name)) {
             log.error("Nom du client est null");
             return null;
         }

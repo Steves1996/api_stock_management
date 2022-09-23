@@ -56,7 +56,7 @@ public class FournisseurServiceImpl implements FournisseurService {
 
     @Override
     public FournisseurDto findFournisseurByNom(String name) {
-        if (StringUtils.hasLength(name)) {
+        if (!StringUtils.hasLength(name)) {
             log.error("Nom du fournisseur est null");
             return null;
         }

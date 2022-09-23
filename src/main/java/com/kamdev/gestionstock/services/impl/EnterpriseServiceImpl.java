@@ -57,7 +57,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     @Override
     public EntrepriseDto findEntrepriseByNom(String name) {
-        if (StringUtils.hasLength(name)) {
+        if (!StringUtils.hasLength(name)) {
             log.error("Nom de l'entreprise est null");
             return null;
         }
