@@ -9,6 +9,7 @@ import com.kamdev.gestionstock.repository.UtilisateurRepository;
 import com.kamdev.gestionstock.services.UtilisateurService;
 import com.kamdev.gestionstock.validator.UtilisateurValidator;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,9 +24,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private UtilisateurRepository utilisateurRepository;
 
+    private ModelMapper modelMapper;
+
     @Autowired
-    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, ModelMapper modelMapper) {
         this.utilisateurRepository = utilisateurRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override

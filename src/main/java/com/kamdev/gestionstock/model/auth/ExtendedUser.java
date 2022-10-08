@@ -21,5 +21,9 @@ public class ExtendedUser extends User {
                         Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.idEntreprise = idEntreprise;
+
+
     }
+
+
 }

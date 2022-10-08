@@ -38,7 +38,6 @@ public class EntrepriseDto {
                 .email(entreprise.getEmail())
                 .numTel(entreprise.getNumTel())
                 .siteWeb(entreprise.getSiteWeb())
-
 //                .utilisateurList(entreprise.getUtilisateurList() != null ?
 //                        entreprise.getUtilisateurList()
 //                                .stream()
