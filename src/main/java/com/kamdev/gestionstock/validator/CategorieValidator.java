@@ -11,7 +11,7 @@ public class CategorieValidator {
     public static List<String> validate (CategorieDto categorieDto){
         List<String> errors = new ArrayList<>();
 
-        if(categorieDto == null){
+        if(categorieDto == null ){
             errors.add("Entrez les informations de la catégorie");
             return  errors;
         }

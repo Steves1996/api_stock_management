@@ -2,12 +2,15 @@ package com.kamdev.gestionstock.services.impl;
 
 import com.kamdev.gestionstock.dto.ClientDto;
 import com.kamdev.gestionstock.dto.EntrepriseDto;
+import com.kamdev.gestionstock.dto.RolesDto;
+import com.kamdev.gestionstock.dto.UtilisateurDto;
 import com.kamdev.gestionstock.exception.EntityNotFoundException;
 import com.kamdev.gestionstock.exception.ErrorCodes;
 import com.kamdev.gestionstock.exception.InvalidEntityException;
 import com.kamdev.gestionstock.model.Client;
 import com.kamdev.gestionstock.model.Entreprise;
 import com.kamdev.gestionstock.repository.EntrepriseRepository;
+import com.kamdev.gestionstock.repository.RolesRepository;
 import com.kamdev.gestionstock.services.EnterpriseService;
 import com.kamdev.gestionstock.validator.ClientValidator;
 import com.kamdev.gestionstock.validator.EntrepriseValidator;
@@ -16,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.management.relation.Role;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,10 +31,16 @@ import java.util.stream.Collectors;
 public class EnterpriseServiceImpl implements EnterpriseService {
 
     private EntrepriseRepository entrepriseRepository;
+    private UtilisateurServiceImpl utilisateurService;
+    private RolesRepository rolesRepository;
 
     @Autowired
-    public EnterpriseServiceImpl(EntrepriseRepository entrepriseRepository) {
+    public EnterpriseServiceImpl(EntrepriseRepository entrepriseRepository,
+                                 UtilisateurServiceImpl utilisateurService,
+                                 RolesRepository rolesRepository) {
         this.entrepriseRepository = entrepriseRepository;
+        this.utilisateurService = utilisateurService;
+        this.rolesRepository = rolesRepository;
     }
 
     @Override
@@ -39,7 +50,38 @@ public class EnterpriseServiceImpl implements EnterpriseService {
             log.error("Entrprise pas valid {}", dto);
             throw new InvalidEntityException("l'entreprise n'est pas valide", ErrorCodes.ENTREPRISE_NOT_VALID, errors);
         }
-        return EntrepriseDto.fromEntity(entrepriseRepository.save(EntrepriseDto.toEntity(dto)));
+
+        EntrepriseDto savedEntreprise = EntrepriseDto.fromEntity(
+                entrepriseRepository.save(EntrepriseDto.toEntity(dto))
+        );
+        UtilisateurDto utilisateurDto = fromEntreprise(savedEntreprise);
+
+        UtilisateurDto savedUser = utilisateurService.save(utilisateurDto);
+
+        RolesDto rolesDto = RolesDto.builder()
+                .roleName("ADMIN")
+                .utilisateur(savedUser)
+                .build();
+
+        rolesRepository.save(RolesDto.toEntity(rolesDto));
+        return savedEntreprise;
+    }
+
+    private UtilisateurDto fromEntreprise(EntrepriseDto dto) {
+        return UtilisateurDto.builder()
+                .adresse(dto.getAdresse())
+                .nom(dto.getNom())
+                .prenom(dto.getCodefiscal())
+                .email(dto.getEmail())
+                .motDePasse(generateRandomPassword())
+                .entreprise(dto)
+                .dateDeNaissance(String.valueOf(Instant.now()))
+                .photo(dto.getPhoto())
+                .build();
+    }
+
+    private String generateRandomPassword() {
+        return "Allen1205@";
     }
 
     @Override

@@ -1,15 +1,12 @@
 package com.kamdev.gestionstock.services.impl;
 
-import com.kamdev.gestionstock.dto.FournisseurDto;
 import com.kamdev.gestionstock.dto.UtilisateurDto;
 import com.kamdev.gestionstock.exception.EntityNotFoundException;
 import com.kamdev.gestionstock.exception.ErrorCodes;
 import com.kamdev.gestionstock.exception.InvalidEntityException;
-import com.kamdev.gestionstock.model.Fournisseur;
 import com.kamdev.gestionstock.model.Utilisateur;
 import com.kamdev.gestionstock.repository.UtilisateurRepository;
 import com.kamdev.gestionstock.services.UtilisateurService;
-import com.kamdev.gestionstock.validator.FournisseurValidator;
 import com.kamdev.gestionstock.validator.UtilisateurValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +78,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             return;
         }
         utilisateurRepository.deleteById(id);
+    }
+
+    @Override
+    public  UtilisateurDto findUtilisateurByEmail(String email){
+        return utilisateurRepository.findUtilisateurByEmail(email)
+                .map(UtilisateurDto::fromEntity)
+                .orElseThrow(()->new EntityNotFoundException(
+                        "Aucun utilisateur avec l'email = "+email+" n'est trouve dans la BDD",
+                        ErrorCodes.UTILISATEUR_NOT_FOUND
+                ));
     }
 }

@@ -38,11 +38,12 @@ public class EntrepriseDto {
                 .email(entreprise.getEmail())
                 .numTel(entreprise.getNumTel())
                 .siteWeb(entreprise.getSiteWeb())
-                .utilisateurList(entreprise.getUtilisateurList() != null ?
-                        entreprise.getUtilisateurList()
-                                .stream()
-                                .map(UtilisateurDto::fromEntity)
-                                .collect(Collectors.toList()) : null)
+
+//                .utilisateurList(entreprise.getUtilisateurList() != null ?
+//                        entreprise.getUtilisateurList()
+//                                .stream()
+//                                .map(UtilisateurDto::fromEntity)
+//                                .collect(Collectors.toList()) : null)
                 .build();
     }
 

@@ -2,6 +2,7 @@ package com.kamdev.gestionstock.config;
 
 import com.kamdev.gestionstock.services.auth.ApplicationUserDetailsService;
 import com.kamdev.gestionstock.utils.JwtUtil;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import java.io.IOException;
 public class ApplicationRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
+
     @Autowired
     private ApplicationUserDetailsService userDetailsService;
 
@@ -31,15 +33,17 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
 
         String username = null;
         String jwt = null;
+        String idEntreprise = null;
 
-        if(StringUtils.hasLength(authHeader) && authHeader.startsWith("Bearer ")){
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
             username = jwtUtil.extractUsername(jwt);
+            idEntreprise = jwtUtil.extractIdEntreprise(jwt);
         }
 
-        if (StringUtils.hasLength(username) && SecurityContextHolder.getContext().getAuthentication() == null){
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if(jwtUtil.validateToken(jwt, userDetails)){
+            if (jwtUtil.validateToken(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
                 );
@@ -49,6 +53,7 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-        filterChain.doFilter(request,response);
+        MDC.put("isEntreprise", idEntreprise);
+        filterChain.doFilter(request, response);
     }
 }

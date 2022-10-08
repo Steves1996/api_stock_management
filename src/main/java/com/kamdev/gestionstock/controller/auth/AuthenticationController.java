@@ -2,6 +2,7 @@ package com.kamdev.gestionstock.controller.auth;
 
 import com.kamdev.gestionstock.dto.auth.AuthenticationRequest;
 import com.kamdev.gestionstock.dto.auth.AuthenticationResponse;
+import com.kamdev.gestionstock.model.auth.ExtendedUser;
 import com.kamdev.gestionstock.services.auth.ApplicationUserDetailsService;
 import com.kamdev.gestionstock.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class AuthenticationController {
                 )
         );
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getLogin());
-        final String jwt = jwtUtil.generateToken(userDetails);
+        final String jwt = jwtUtil.generateToken((ExtendedUser) userDetails);
         return  ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt).build());
     }
 }
